@@ -42,7 +42,7 @@ function App() {
 
   const getCurrentSong = async () => {
     try {
-      const current_song = await api.get("playback");
+      const current_song = await api.get("https://redes-spotify-back.herokuapp.com/playback");
       if (typeof current_song.data != "string") {
         setCurrentTrack(current_song.data);
       }
