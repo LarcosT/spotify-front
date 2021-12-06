@@ -58,7 +58,7 @@ function App() {
     setFetch(true);
     try {
       if (input) {
-        const result = await api.get("search", {
+        const result = await api.get("https://redes-spotify-back.herokuapp.com/search", {
           params: { input, limit: 5, offset: 0 },
         });
         if (result.data.items) {
@@ -76,7 +76,7 @@ function App() {
       try {
         setQueueing(true);
         const response = await api
-          .post("add_to_queue", { uri })
+          .post("https://redes-spotify-back.herokuapp.com/add_to_queue", { uri })
           .catch((err) => console.log(err));
         setQueueing(false);
         if (typeof response.data === "string") {
