@@ -27,6 +27,7 @@ const SpotifyLogo = styled(BsSpotify)`
 const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
   headers: { "Content-Type": "application/json" },
+  withCredentials: true,
 });
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
       if (typeof current_song.data != "string") {
         setCurrentTrack(current_song.data);
       }
-    } catch { }
+    } catch {}
   };
 
   useEffect(() => {
@@ -79,11 +80,15 @@ function App() {
           .catch((err) => console.log(err));
         setQueueing(false);
         if (typeof response.data === "string") {
-          return addToast(response.data, { appearance: "error" });
+          return addToast(response.data, {
+            appearance: "error",
+            autoDismiss: true,
+          });
         }
         setQueuedTracks([...queuedTracks, uri]);
         return addToast("Música adicionada com sucesso", {
           appearance: "success",
+          autoDismiss: true,
         });
       } catch (err) {
         console.log(err);
@@ -95,7 +100,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header" />
-
       <SpotifyLogo />
       {currentTrack && (
         <div>

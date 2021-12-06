@@ -36,11 +36,13 @@ const InputIcon = styled(IoSearchOutline)`
 const InputSpotify = ({ onBlur, onInput, value, placeholder, onIconClick }) => {
   return (
     <InputContainer>
-      <InputIcon onClick={onIconClick}></InputIcon>
+      <InputIcon onClick={onBlur}></InputIcon>
       <InputSpot
+        onKeyDown={(e) => {
+          if (e.code === "Enter") onBlur();
+        }}
         value={value}
         onInput={onInput}
-        onBlur={onBlur}
         type={"search"}
         placeholder={placeholder}
       ></InputSpot>
